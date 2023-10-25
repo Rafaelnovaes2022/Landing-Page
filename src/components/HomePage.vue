@@ -101,8 +101,13 @@
             <div class="row justify-content-center mt-3 mb-3">
 
                 <div v-if="show_contact == true" class="col-lg-4">
-                    <h2>Have Any Questions?</h2>
-                    <p>Contact us by filling out the information below</p>
+                    <div>
+                        <div class="text-center">
+                            <h2>Have Any Questions?</h2>
+                            <p>Contact us by filling out the information below</p>
+                        </div>
+                    </div>
+
 
                     <div v-if="contact_notice != ''" class="alert alert-warning">
                         There was a problem submitting your message. {{ contact_notice }}
