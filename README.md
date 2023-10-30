@@ -1,4 +1,4 @@
-# landingpage
+# landingpage1.0
 
 ## Project setup
 ```

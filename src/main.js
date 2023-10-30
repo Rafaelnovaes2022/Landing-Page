@@ -1,14 +1,19 @@
-import { createApp } from 'vue'
+import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import { firestorePlugin } from 'vuefire';
+import store from './store'
 
-import '@popperjs/core';
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {BootstrapVue , IconsPlugin} from 'bootstrap-vue'
 
-Vue.config.productionTip = false;
-Vue.use(firestorePlugin)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+Vue.config.productionTip = false
 
-createApp(App).use(router).mount('#app')
+new Vue({
+  router,
+  store,
+  BootstrapVue,
+  IconsPlugin,
+  render: h => h(App)
+}).$mount('#app')

@@ -1,4 +1,3 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyAlL5uO7n7uuERYvYrjMAb6L2Z2-D1Pvp8",
     authDomain: "landig-page-aad4f.firebaseapp.com",
@@ -8,15 +7,3 @@ const firebaseConfig = {
     appId: "1:1079431367726:web:d330d13104723376f123bf",
     measurementId: "G-37LQC2BFKX"
   };
-
-// export default {
-//     config: {
-//       apiKey: "",
-//       authDomain: "",
-//       databaseURL: "",
-//       projectId: "",
-//       storageBucket: "",
-//       messagingSenderId: "",
-//       appId: "",
-//     }
-// }
