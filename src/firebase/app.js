@@ -1,4 +1,8 @@
-import Firebase from 'firebase/app'
+
+import firebase from 'firebase/compat/app'
+import "firebase/compat/storage";
 import credentials from './credentials'
 
-export const App = Firebase.initializeApp(credentials.config);
+firebase.initializeApp(credentials.config);
+
+export const App = firebase.initializeApp(credentials.config);

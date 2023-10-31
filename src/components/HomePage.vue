@@ -23,11 +23,17 @@
 
                         <div class="border p-3 p-md-5 bg-white rounded shadow">
                             <h2 class="text-center">Coming Soon</h2>
-                            <form>
+
+                            <form @submit.prevent="addEmail(email)">
                                 <div class="form-group">
                                     <label for="emailSignup">Reserve your account now, we'll contact you when it's
                                         live</label>
-                                    <input id="emailSignup" placeholder="Enter Email" class="form-control">
+                                    <input v-model="email"
+                                           type="email"
+                                           id="emailSignup" 
+                                           placeholder="Enter Email" 
+                                           class="form-control">
+
                                     <div class="text-center">
                                         <small id="emailHelp" class="form-text text-muted" style="text-align: center;">
                                             We'll never share your email address
@@ -38,6 +44,10 @@
 
                                 <div class="text-center mt-3">
                                     <button type="submit" class="btn btn-success">Join Waiting List</button>
+                                    <div class="mt-4">
+                                     <p class="m-0">{{ message }}</p>
+
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -147,22 +157,92 @@
     </div>
 </template>
 
-
 <script>
+//import { Auth } from '@/firebase/auth';
+
+//import FirebaseApp  from '../firebase/app';
 
 export default {
-    data() {
-        return {
-            title: 'Travel Treasury',
-            email: '',
-            message: '',
-            show_contact: true,
-            contact_email: '',
-            contact_message: '',
-            contact_notice: '',
+  data () {
+    return {
+      title: 'Travel Treasury',
+      email: '',
+      message: 'something',
+      show_contact: true,
+      contact_email: '',
+      contact_message: '',
+      contact_notice: '',
+      /*storageRef: FirebaseApp.storage(),*/
+      midiaServidor: {
+        id: null,
+        midia: null,
+        descricao: null
+      }
+    }
+  },
+  methods: {
+    async addEmail(email) {
+      var noticeMessage = "🎉 Your account has been reserved 🎉"
+      await Auth.createUserWithEmailAndPassword(email, this.randomPassword(20)).catch(function(error) {
+        if (error.code != "auth/email-already-in-use") {
+          noticeMessage = error.message;
         }
+      });
+      this.message = noticeMessage;
+      this.email = '';
     },
-}
+    /*
+    onSelectServidor(obj) {
+      this.midiaServidor.descricao = "Declaração Servidor";
+
+      //Capturando objeto
+      let file = obj.files[0];
+      let fileReader = new FileReader();
+      // //Capiturando Base64 do objeto
+      fileReader.onload = () => {
+        this.midiaServidor.midia = fileReader.result;
+        console.log(fileReader);
+      };
+      fileReader.readAsDataURL(file);
+      this.declaracao.midia[0] = this.midiaServidor;
+    },
+    onUploadServ() {
+      this.storageRef
+        .ref()
+        .child(
+          `declaracao_servidor/${this.declaracao.ano}/${this.declaracao.vinculo.id}`
+        )
+        .putString(this.declaracao.midia[0].midia, "data_url", {
+          contentType: "application/pdf",
+        })
+        .then((snapshot) => {
+          this.getDownloadURLServ(snapshot);
+        })
+        .catch((error) => {
+          console.log("Error: " + error);
+          this.$toast.add({
+            severity: "error",
+            summary: "Error!",
+            detail: "Não foi possível fazer upload!",
+            life: 3000,
+          });
+        });
+    },
+    getDownloadURLServ(snapshot) {
+      snapshot.ref.getDownloadURL().then((downloadURL) => {
+        this.declaracao.midia[0].midia = downloadURL;
+        this.$toast.add({
+          severity: "success",
+          summary: "Sucesso!",
+          detail: "Upload feito!",
+          life: 3000,
+        });
+        this.salvarDec();
+      });
+    },
+    */
+},
+};
 </script>
 
 <style scoped>
